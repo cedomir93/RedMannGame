@@ -74,7 +74,7 @@ public class Player extends Entity {
 		life = maxLife;
 		dexterity = 1;
 		exp = 0;
-		nextLevelExp = 4;
+		nextLevelExp = 6;
 		coin = 0;
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		currentShield = new OBJ_Shield_Wood(gp);
@@ -235,11 +235,12 @@ public class Player extends Entity {
 			}
 		}
 		
-		if (gp.keyH.shotKeyPressed == true && projectile.alive == false) {
+		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvaibleCounter == 30) {
 			//SET DEFAULT COORDINATES, DIRECTION AND USER
 			projectile.set(worldX, worldY, direction, true, this);
 			// ADD IT TO THE LIST
 			gp.projectileList.add(projectile);
+			shotAvaibleCounter = 0;
 			gp.playSE(10);
 		}
 		
@@ -250,6 +251,9 @@ public class Player extends Entity {
 				invincible = false;
 				invincibleCounter = 0;
 			}
+		}
+		if (shotAvaibleCounter < 30) {
+			shotAvaibleCounter++;
 		}
 		
 	}
@@ -360,19 +364,20 @@ public class Player extends Entity {
 				if (gp.monster[i].life <= 0) {
 					gp.monster[i].dying = true;
 					gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
-					gp.ui.addMessage("Exp " + gp.monster[i].exp);
+					gp.ui.addMessage("Exp + " + gp.monster[i].exp);
 					exp += gp.monster[i].exp;
 					checkLevelUp();
-					gp.playSE(8);
-					gp.gameState = gp.dialougeState;
-					gp.ui.currentDIalouge = "You are level " + level + " now!\n"
-							+ "You feel stronger!";
+					//gp.playSE(8);
+					//gp.gameState = gp.dialougeState;
+					//gp.ui.currentDIalouge = "You are level " + level + " now!\n"
+					//		+ "You feel stronger!";
 				}
 			}
 		}
 		
 	}
 	public void checkLevelUp() {
+		
 		if (exp >= nextLevelExp) {
 			level++;
 			nextLevelExp = nextLevelExp*2;
@@ -381,7 +386,9 @@ public class Player extends Entity {
 			dexterity++;
 			attack = getAttack();
 			defence = getDefence();
-			
+			gp.playSE(8);
+			gp.gameState = gp.dialougeState;
+			gp.ui.currentDIalouge = "Tou are level " + level + " now!";
 		}
 	}
 	public void selectItem() {

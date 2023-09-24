@@ -9,7 +9,6 @@ public class CollisionChecker {
 	public CollisionChecker(GamePanel gp) {
 		this.gp=gp;
 	}
-	
 	public void checkTile(Entity entity) {
 		
 		int entityLeftWorldX = (int) (entity.worldX + entity.solidArea.x);

@@ -34,6 +34,7 @@ public class Entity {
 	boolean hpBarOn = false;
 	public int invincibleCounter = 0;
 	int dyingCounter = 0;
+	public int shotAvaibleCounter = 0; //make sure that fire ball is fired only once for now and after sometimes!
 	int hpBarCounter = 0;
 	String dialouges[] = new String[20];
 	int dialougeIndex = 0;
@@ -77,7 +78,6 @@ public class Entity {
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
-	
 	public void setAction() {}
 	public void damageReaction() {}
 	public void speak() {
@@ -118,16 +118,11 @@ public class Entity {
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
 		if (this.type == type_monster && contactPlayer == true) {
-			if (gp.player.invincible = false) {
+			//damagePlayer(attack); -- past code
+			if (gp.player.invincible == false) {
 				//we can give damage
-				gp.playSE(6);
-				int damage = attack - gp.player.defence;
-				if (damage < 0) {
-					damage = 0;
-				}
-				gp.player.life -= damage;
-				//gp.player.life -= 1;
-				gp.player.invincible =  true;
+				gp.player.life -= 1;
+				gp.player.invincible = true;
 			}
 		}
 		
@@ -158,6 +153,24 @@ public class Entity {
 					invincibleCounter = 0;
 				}
 			}
+			if (shotAvaibleCounter < 30) {
+				shotAvaibleCounter++;
+			}
+	}
+	public void damagePlayer(int attack) {
+		
+		if (gp.player.invincible = false) {
+			//we can give damage
+			gp.playSE(6);
+			int damage = attack - gp.player.defence;
+			if (damage < 0) {
+				damage = 0;
+			}
+			gp.player.life -= damage;
+			//gp.player.life -= 1;
+			gp.player.invincible =  true;
+		}
+		
 	}
 	public void draw(Graphics2D g2) {
 		
@@ -218,7 +231,6 @@ public class Entity {
 			changeAlpha(g2, 1f);
 		}
 	}
-	
 	public void dyingAnimation(Graphics2D g2) {
 		
 		dyingCounter++;
