@@ -63,7 +63,7 @@ public class Entity {
 	public int attackValue;
 	public int defenseValue;
 	public String description = ""; 
-	public int useCost;
+	public int useCost; // cost to shoot a projectile
 	//TYPE
 	public int type; // 0 - player, 1 - npc .............
 	public final int type_player = 0;

@@ -22,7 +22,6 @@ public class KeyHandler implements KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
@@ -54,7 +53,6 @@ public class KeyHandler implements KeyListener {
 			characterState(code);
 		}
 	}
-	
 	public void titleState(int code) {
 		if (code == KeyEvent.VK_UP) {
 			gp.ui.commandNum--;
@@ -155,7 +153,6 @@ public class KeyHandler implements KeyListener {
 			gp.player.selectItem();
 		}
 	}
-
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();

@@ -137,6 +137,7 @@ public class GamePanel extends JPanel implements Runnable {
 					}
 				}
 			}
+			//PROJECTILE
 			for (int i = 0; i < projectileList.size(); i++) {
 				if (projectileList.get(i) != null) {
 					if(projectileList.get(i).alive == true) {
@@ -153,7 +154,6 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		
 	}
-	
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
@@ -196,6 +196,12 @@ public class GamePanel extends JPanel implements Runnable {
 			for (int i = 0; i < monster.length; i++) {
 				if (monster[i] != null) {
 					entityList.add(monster[i]);
+				}
+			}
+			//add projectile
+			for (int i = 0; i < projectileList.size(); i++) {
+				if (projectileList.get(i) != null) {
+					entityList.add(projectileList.get(i));
 				}
 			}
 			

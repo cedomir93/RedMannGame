@@ -240,6 +240,7 @@ public class Player extends Entity {
 			projectile.set(worldX, worldY, direction, true, this);
 			// ADD IT TO THE LIST
 			gp.projectileList.add(projectile);
+			gp.playSE(10);
 		}
 		
 		//THE REST OF OUTSIDE OF A KEY OF STATEMENT!
@@ -296,7 +297,6 @@ public class Player extends Entity {
 		
 		
 	}
-	
 	public void pickUpObject(int i) {
 		
 		if (i != 999) {
@@ -328,7 +328,6 @@ public class Player extends Entity {
 		}
 		//gp.keyH.enterPressed = false;
 	}
-
 	public void contactMonster(int i) {
 		
 		if (i != 999) {
@@ -344,7 +343,6 @@ public class Player extends Entity {
 			}
 		}
 	}
-	
 	public void damageMonster(int i) {
 		
 		if (i != 999) {

@@ -15,7 +15,7 @@ public class Projectile extends Entity{
 		this.direction = direction;
 		this.alive = alive;
 		this.user = user;
-		this.life = this.maxLife;
+		this.life = this.maxLife; //Reset the life to the max value after you shoot it!
 	}
 	public void update() {
 		switch (direction) {
