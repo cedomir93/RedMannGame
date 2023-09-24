@@ -18,6 +18,18 @@ public class Projectile extends Entity{
 		this.life = this.maxLife; //Reset the life to the max value after you shoot it!
 	}
 	public void update() {
+		
+		if (user == gp.player) {
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+			if (monsterIndex != 999) {
+				gp.player.damageMonster(monsterIndex, attack);
+				alive = false;
+			}
+		}
+		if (user != gp.player) {
+			
+		}
+		
 		switch (direction) {
 		case "up": worldY -= speed; break;
 		case "down": worldY += speed; break;
