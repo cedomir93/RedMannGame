@@ -26,7 +26,7 @@ public class AssetSetter {
 		
 		int i = 0;
 		
-		gp.obj[i] = new OBJ_Coin_Bronze(gp);
+		gp.obj[i] = new OBJ_Axe(gp);
 		gp.obj[i].worldX = gp.tileSize*33;
 		gp.obj[i].worldY = gp.tileSize*21;
 		i++;

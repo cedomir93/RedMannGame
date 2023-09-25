@@ -1,5 +1,6 @@
 package tile_interactive;
 
+import entity.Entity;
 import main.GamePanel;
 
 public class IT_DryTree extends interactiveTile {
@@ -14,5 +15,11 @@ public class IT_DryTree extends interactiveTile {
 		down1 = setup("/tiles_interactive/drytree", gp.tileSize, gp.tileSize);
 		destructible = true;
 	}
-
+	public boolean isCorrectItem(Entity entity) {
+		boolean isCorrectItem = false;
+		if (entity.currentWeapon.type == type_axe) {
+			isCorrectItem = true;
+		}
+		return isCorrectItem;
+	}
 }
