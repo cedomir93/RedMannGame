@@ -98,6 +98,8 @@ public class EventHandler {
 			gp.playSE(2);
 			gp.ui.currentDIalouge = "ДАЈ СРПСКУ РАКИЈУ БРЕ!";
 			gp.player.life = gp.player.maxLife;
+			//CODE BELOW IS HEALING POOL EFECT FOR CRYSTALS, SAME AREA WHERE HEALING POOL IS
+			gp.player.mana = gp.player.maxLife;
 			gp.aSetter.setMonster(); //Every time we heal up at the pool, new monsters appears!
 		}
 	}

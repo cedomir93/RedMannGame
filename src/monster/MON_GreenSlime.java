@@ -24,6 +24,7 @@ public class MON_GreenSlime extends Entity {
 		defence = 0;
 		exp = 2;
 		projectile = new OBJ_Rock(gp);
+		
 		solidArea.x = 3;
 		solidArea.y = 18;
 		solidArea.width = 42;
@@ -70,7 +71,7 @@ public class MON_GreenSlime extends Entity {
 		//Slime is shooting rock at player!
 		
 		if (i > 99 && projectile.alive == false && shotAvaibleCounter == 30) {
-			projectile.set(worldX, worldX, direction, true, this);
+			projectile.set(worldX, worldY, direction, true, this);
 			gp.projectileList.add(projectile);
 			shotAvaibleCounter = 0;
 		}

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import object.OBJ_Key;
+import object.OBJ_ManaCrystal;
 import object.OBJ_Heart;
 import entity.Entity;
 
@@ -16,7 +17,7 @@ public class UI {
 	GamePanel gp;
 	Graphics2D g2;
 	Font arial_40, arial_80B;
-	BufferedImage heart_full, heart_half, heart_blank;
+	BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
 	//BufferedImage keyImage;
 	public boolean messageOn = false;
 //	public String message = "";
@@ -40,7 +41,10 @@ public class UI {
 		heart_full = heart.image;
 		heart_half = heart.image2;
 		heart_blank = heart.image3;
-		
+		//MANA KRISTALI
+		Entity crystal = new OBJ_ManaCrystal(gp);
+		crystal_full = crystal.image;
+		crystal_blank = crystal.image2;
 	}
 	public void addMessage(String text) {
 		
@@ -51,7 +55,6 @@ public class UI {
 		
 		
 	}
-	
 	public void draw(Graphics2D g2) {
 		
 		this.g2 = g2;
@@ -85,7 +88,6 @@ public class UI {
 			drawInventory();
 		}
 	}
-	
 	public void drawPlayerLife() {
 		
 		int x = gp.tileSize/2;
@@ -114,6 +116,24 @@ public class UI {
 			}
 			i++;
 			x += gp.tileSize;
+		}
+		//DRAW MAX KRISTALI
+		x = (gp.tileSize/2) - 5;
+		y = (int) (gp.tileSize*1.5);
+		i = 0;
+		while(i < gp.player.maxMana) {
+			g2.drawImage(crystal_blank, x, y,null);
+			i++;
+			x += 35;
+		}
+		//DRAW MANA
+		x = (gp.tileSize/2) - 5;
+		y = (int) (gp.tileSize*1.5);
+		i = 0;
+		while(i < gp.player.mana) {
+			g2.drawImage(crystal_full, x, y,null);
+			i++;
+			x += 35;
 		}
 	}
 	public void drawMessage() {
@@ -189,7 +209,6 @@ public class UI {
 		}
 		
 	}
-	
 	public void drawPauseScreen() {
 		
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
@@ -199,7 +218,6 @@ public class UI {
 		
 		g2.drawString(text, x, y);
 	}
-	
 	public void drawDialougeScreen() {
 		
 		//WINDOW
@@ -220,7 +238,6 @@ public class UI {
 		
 		//g2.drawString(currentDIalouge, x, y);
 	}
-	
 	public void drawCharacterScreen() {
 		
 		//CREATE A FRAME
@@ -239,28 +256,18 @@ public class UI {
 		final int lineHeight = 35;
 		
 		//NAMES
-		g2.drawString("Ниво", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Живот", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Јачина", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Cпретност", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Напад", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Одбрана", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Искуство", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Следећи ниво", textX, textY);
-		textY += lineHeight;
-		g2.drawString("Новчић", textX, textY);
-		textY += lineHeight + 20;
-		g2.drawString("Оружије", textX, textY);
-		textY += lineHeight + 15;
-		g2.drawString("Штит", textX, textY);
-		textY += lineHeight;
+		g2.drawString("Ниво", textX, textY);textY += lineHeight;
+		g2.drawString("Живот", textX, textY);textY += lineHeight;
+		g2.drawString("Кристал моћи", textX, textY);textY += lineHeight;
+		g2.drawString("Јачина", textX, textY);textY += lineHeight;
+		g2.drawString("Cпретност", textX, textY);textY += lineHeight;
+		g2.drawString("Напад", textX, textY);textY += lineHeight;
+		g2.drawString("Одбрана", textX, textY);textY += lineHeight;
+		g2.drawString("Искуство", textX, textY);textY += lineHeight;
+		g2.drawString("Следећи ниво", textX, textY);textY += lineHeight;
+		g2.drawString("Новчић", textX, textY);textY += lineHeight + 10;
+		g2.drawString("Оружије", textX, textY);textY += lineHeight + 15;
+		g2.drawString("Штит", textX, textY);textY += lineHeight;
 		
 		//VALUES
 		int tailX = (frameX + frameWidth) - 30;
@@ -274,6 +281,11 @@ public class UI {
 		textY += lineHeight;
 			//Life...
 		value = String.valueOf(gp.player.life + "/" + gp.player.maxLife);
+		textX = getXforAlignToRightText(value, tailX);
+		g2.drawString(value, tailX, textY);
+		textY += lineHeight;
+			//Mana
+		value = String.valueOf(gp.player.mana + "/" + gp.player.maxMana);
 		textX = getXforAlignToRightText(value, tailX);
 		g2.drawString(value, tailX, textY);
 		textY += lineHeight;
@@ -313,9 +325,9 @@ public class UI {
 		g2.drawString(value, tailX, textY);
 		textY += lineHeight;
 		
-		g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY-15, null);
+		g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY-24, null);
 		textY += gp.tileSize;
-		g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY-15, null);
+		g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY-24, null);
 		
 	}
 	public void drawInventory() {
@@ -395,13 +407,11 @@ public class UI {
 		g2.setStroke(new BasicStroke(5));
 		g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 	}
-	
 	public int getXforCenteredText(String text) {
 		int lenght = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth(); 
 		int x = gp.screenWidth/2 - lenght/2;
 		return x;
 	}
-	
 	public int getXforAlignToRightText(String text, int taliX) {
 		int lenght = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth(); 
 		int x = taliX - lenght;

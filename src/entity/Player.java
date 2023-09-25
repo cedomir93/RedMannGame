@@ -18,6 +18,7 @@ import main.KeyHandler;
 import main.UtilityTool;
 import object.OBJ_Fireball;
 import object.OBJ_Key;
+import object.OBJ_Rock;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -72,6 +73,9 @@ public class Player extends Entity {
 		strenght = 1; // More strenght, more damage he gives!
 		maxLife = 6; // More dexterity, less damage
 		life = maxLife;
+		maxMana = 4;
+		mana = maxMana;
+		ammo = 10;
 		dexterity = 1;
 		exp = 0;
 		nextLevelExp = 6;
@@ -235,9 +239,13 @@ public class Player extends Entity {
 			}
 		}
 		
-		if (gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvaibleCounter == 30) {
+		if (gp.keyH.shotKeyPressed == true && projectile.alive == false
+				&& shotAvaibleCounter == 30 && projectile.haveResource(this) == true) {
 			//SET DEFAULT COORDINATES, DIRECTION AND USER
 			projectile.set(worldX, worldY, direction, true, this);
+			//SUBTRACT THE COST (POWERS, AMMO, ETC.....)
+			projectile.subtractResource(this);
+			
 			// ADD IT TO THE LIST
 			gp.projectileList.add(projectile);
 			shotAvaibleCounter = 0;
@@ -255,7 +263,6 @@ public class Player extends Entity {
 		if (shotAvaibleCounter < 30) {
 			shotAvaibleCounter++;
 		}
-		
 	}
 	public void attacking() {
 		

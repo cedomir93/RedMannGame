@@ -49,6 +49,7 @@ public class Entity {
 	public int maxMana;
 	public int mana;
 	public int level;
+	public int ammo;
 	public int strenght;
 	public int dexterity;
 	public int attack;
@@ -118,12 +119,16 @@ public class Entity {
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
 		if (this.type == type_monster && contactPlayer == true) {
-			//damagePlayer(attack); -- past code
-			if (gp.player.invincible == false) {
+			damagePlayer(attack); 
+		/*	if (gp.player.invincible == false) {
 				//we can give damage
+				int damage = attack - gp.player.defence;
+				if (damage < 0) {
+					damage = 0;
+				}
 				gp.player.life -= 1;
 				gp.player.invincible = true;
-			}
+			} */
 		}
 		
 		if (collisionOn == false ) {

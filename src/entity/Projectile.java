@@ -55,6 +55,10 @@ public class Projectile extends Entity{
 			}
 			spriteCounter = 0;
 		}
-		
 	}
+	public boolean haveResource(Entity user) { // Resource for crystal for shooting a fire ball
+		boolean haveResource = false; 
+		return haveResource;
+	}
+	public void subtractResource(Entity user) {}
 }
