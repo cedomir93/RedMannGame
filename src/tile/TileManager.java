@@ -23,21 +23,21 @@ public class TileManager {
 		tile = new Tile[100];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		getTileImage();
-		loadMap("/maps/worldV2.txt");
+		loadMap("/maps/worldV3.txt");
 	}
 	
 	public void getTileImage() {
 		
 		//PLACEHOLDER
 		
-			setup(0, "grass00", false);
-			setup(1, "grass00", false);
-			setup(2, "grass00", false);
-			setup(3, "grass00", false);
-			setup(4, "grass00", false);
-			setup(5, "grass00", false);
-			setup(6, "grass00", false);
-			setup(7, "grass00", false);
+			setup(00, "grass00", false);
+			setup(01, "grass00", false);
+			setup(02, "grass00", false);
+			setup(03, "grass00", false);
+			setup(04, "grass00", false);
+			setup(05, "grass00", false);
+			setup(06, "grass00", false);
+			setup(07, "grass00", false);
 			setup(8, "grass00", false);
 			setup(9, "grass00", false);
 			
@@ -75,6 +75,7 @@ public class TileManager {
 			setup(39,"earth", false);
 			setup(40, "wall", true);
 			setup(41, "tree", true);
+			setup(42, "trunk", true);
 	}
 	
 	public void setup(int index, String imageName, boolean collision) {
@@ -147,19 +148,13 @@ public class TileManager {
 				worldX - gp.tileSize< gp.player.worldX + gp.player.screenX &&
 				worldY + gp.tileSize> gp.player.worldY - gp.player.screenY &&
 				worldY - gp.tileSize< gp.player.worldY + gp.player.screenY) {
-				
-				g2.drawImage(tile[tileNum].image, (int)screenX, (int)screenY, null);
-				
+					g2.drawImage(tile[tileNum].image, (int)screenX, (int)screenY, null);
 			}
-			
-			
 			worldCol++;
-			
 			if (worldCol == gp.maxWorldCol) {
 				worldCol = 0;
 				worldRow++;
 			}
 		}
-		
 	}
 }
