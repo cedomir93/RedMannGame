@@ -30,6 +30,11 @@ public class Particle extends Entity{
 	}
 	public void update() {
 		life--;
+		
+		if (life < maxLife/3) { //particle life is less then half or less, yd is greater then every loop
+			yd++;
+		}
+		
 		worldX += xd * speed;
 		worldY += yd * speed;
 		if (life == 0) {
