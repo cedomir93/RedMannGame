@@ -28,7 +28,7 @@ public class AssetSetter {
 		
 		gp.obj[i] = new OBJ_Axe(gp);
 		gp.obj[i].worldX = gp.tileSize*33;
-		gp.obj[i].worldY = gp.tileSize*21;
+		gp.obj[i].worldY = gp.tileSize*7;
 		i++;
 		
 		gp.obj[i] = new OBJ_Heart(gp);
@@ -88,5 +88,7 @@ public class AssetSetter {
 		gp.iTile[i] = new IT_DryTree(gp, 31, 12);i++;
 		gp.iTile[i] = new IT_DryTree(gp, 32, 12);i++;
 		gp.iTile[i] = new IT_DryTree(gp, 33, 12);i++;
+		
+		gp.iTile[i] = new IT_DryTree(gp, 31, 21);i++;
 	}
 }
