@@ -9,7 +9,7 @@ import tile_interactive.*;
 public class IT_DryTree extends interactiveTile {
 
 	GamePanel gp;
-	public IT_DryTree(GamePanel gp, int col, int row) {
+	public IT_DryTree(GamePanel gp, double col, double row) {
 		super(gp, col, row);
 		this.gp = gp;
 		this.worldX = gp.tileSize * col;
