@@ -82,7 +82,6 @@ public class AssetSetter {
 		
 		gp.iTile[mapNum][i] = new IT_DryTree(gp, 31, 21);i++;
 		
-		
 		//PATH TO THE HUT
 		gp.iTile[mapNum][i] = new IT_DryTree(gp, 10, 40);i++;
 		gp.iTile[mapNum][i] = new IT_DryTree(gp, 10, 41);i++;

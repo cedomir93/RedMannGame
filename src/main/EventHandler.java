@@ -6,6 +6,7 @@ public class EventHandler {
 	
 	GamePanel gp;
 	EventRect eventRect[][][]; //using 3 dimensional
+	int tempMap, tempCol, tempRow;
 	
 	int previousEventX, previousEventY;
 	boolean canTouchEvent = true;
@@ -39,7 +40,6 @@ public class EventHandler {
 					row = 0;
 					map++;
 				}
-				
 			}
 		}
 	}
@@ -64,11 +64,8 @@ public class EventHandler {
 			else if (hit(1, 12, 13, "any") == true) {
 				teleport(0, 10, 39);
 			}
-			
-			
 		}
 	}
-	
 	public boolean hit(int map, int col, int row, String reqDirection) { //pass a map number to each map
 		
 		boolean hit = false;
@@ -93,25 +90,6 @@ public class EventHandler {
 			eventRect[map][col][row].x = eventRect[map][col][row].eventRectDefaultX;
 			eventRect[map][col][row].y = eventRect[map][col][row].eventRectDefaultY;
 		}
-	/*	gp.player.solidArea.x = (int) (gp.player.worldX + gp.player.solidArea.x);
-		gp.player.solidArea.y = (int) (gp.player.worldY + gp.player.solidArea.y);
-		eventRect[map][col][row].x = col*gp.tileSize + eventRect[map][col][row].x;
-		eventRect[map][col][row].y = row*gp.tileSize + eventRect[map][col][row].y;
-		
-		if (gp.player.solidArea.intersects(eventRect[map][col][row]) && eventRect[map][col][row].eventDone == false) {
-			if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
-				hit = true;
-				
-				previousEventX = (int) gp.player.worldX;
-				previousEventY = (int) gp.player.worldY;
-			}
-		}
-		
-		gp.player.solidArea.x = gp.player.solidAreaDefaultX;
-		gp.player.solidArea.y = gp.player.solidAreaDefaultY;
-		eventRect[map][col][row].x = eventRect[map][col][row].eventRectDefaultX;
-		eventRect[map][col][row].y = eventRect[map][col][row].eventRectDefaultY;
-		*/
 		return hit;
 	}
 	
@@ -122,7 +100,6 @@ public class EventHandler {
 		//eventRect[col][row] .eventDone = true;
 		canTouchEvent = false;
 	}
-	
 	public void healingPool(int gameState) {
 		
 		if (gp.keyH.enterPressed == true) {
@@ -138,11 +115,10 @@ public class EventHandler {
 	}
 	public void teleport(int map, int col, int row) {
 		
-		gp.currentMap = map;
-		gp.player.worldX = gp.tileSize * col;
-		gp.player.worldY = gp.tileSize * row;
-		previousEventX = (int) gp.player.worldX;
-		previousEventY = (int) gp.player.worldY;
+		gp.gameState = gp.transitionState;
+		tempMap = map;
+		tempCol = col;
+		tempRow = row;
 		canTouchEvent = false;
 		gp.playSE(13);
 	}
